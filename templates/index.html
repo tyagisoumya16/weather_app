@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather Forecast</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+
+        <div class="logo">
+            🌧️ Weather Forecast
+        </div>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- Main Container -->
+
+    <div class="main-container">
+
+        <h1>Weather Forecast</h1>
+
+        <p class="subtitle">
+            Get real-time weather updates for any city
+        </p>
+
+        <!-- Search Box -->
+
+        <form method="POST" class="search-box">
+
+            <input type="text"
+                name="city"
+                placeholder="Enter city name..."
+                required>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- Weather Card -->
+
+        {% if weather %}
+
+        <div class="weather-card">
+
+            <!-- Left Side -->
+
+            <div class="left">
+
+                <h2>
+                    {{ weather.city }}, {{ weather.country }}
+                </h2>
+
+                <p class="date">
+                    Live Weather Report
+                </p>
+
+                <div class="temp-section">
+
+                    <div class="weather-icon">
+                        🌧️
+                    </div>
+
+                    <div>
+
+                        <h1 class="temp">
+                            {{ weather.temperature }}°C
+                        </h1>
+
+                        <p class="condition">
+                            {{ weather.condition }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="extra-info">
+
+                    <span>
+                        Feels like {{ weather.feels_like }}°C
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="right">
+
+                <div class="info">
+
+                    <p>💧 Humidity</p>
+
+                    <span>{{ weather.humidity }}%</span>
+
+                </div>
+
+                <div class="info">
+
+                    <p>🌪 Wind Speed</p>
+
+                    <span>{{ weather.wind }} km/h</span>
+
+                </div>
+
+                <div class="info">
+
+                    <p>📊 Pressure</p>
+
+                    <span>{{ weather.pressure }} hPa</span>
+
+                </div>
+
+                <div class="info">
+
+                    <p>☁ Condition</p>
+
+                    <span>{{ weather.condition }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
